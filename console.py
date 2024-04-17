@@ -118,7 +118,6 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        print("----> this is args:", args)
         args = args.split()
         cls = args[0]
         if cls not in HBNBCommand.classes:
