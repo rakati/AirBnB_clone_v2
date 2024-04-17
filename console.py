@@ -132,14 +132,15 @@ class HBNBCommand(cmd.Cmd):
                     return
                 kwargs[key] = value[1:-1].replace('_', ' ')
             elif '.' in value:
-                sep = value.index('.')
-                if not(value[:sep].isdigit() and value[sep + 1:].isdigit()):
+                try:
+                    kwargs[key] = float(value)
+                except ValueError:
                     return
-                kwargs[key] = float(value)
-            elif value.isdigit():
-                kwargs[key] = int(value)
             else:
-                return
+                try:
+                    kwargs[key] = int(value)
+                except ValueError:
+                    return
         new_instance = HBNBCommand.classes[cls](**kwargs)
         storage.save()
         print(new_instance.id)
