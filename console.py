@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
-            print('(hbnb)')
+            print('(hbnb) ', end='')
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
@@ -129,19 +129,16 @@ class HBNBCommand(cmd.Cmd):
             if value[0] == '"' and value[-1] == '"':
                 # case of string
                 if value[1:-1].count('\\') != value[1:-1].count('"'):
-                    print(f"** double quote inside the {value} must be escaped with a backslash \ **")
                     return
                 kwargs[key] = value[1:-1].replace('_', ' ')
             elif '.' in value:
                 sep = value.index('.')
                 if not(value[:sep].isdigit() and value[sep + 1:].isdigit()):
-                    print(f"** not valid float number **")
                     return
                 kwargs[key] = float(value)
             elif value.isdigit():
                 kwargs[key] = int(value)
             else:
-                print("** not valid param **")
                 return
         new_instance = HBNBCommand.classes[cls](**kwargs)
         storage.save()
@@ -341,6 +338,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
