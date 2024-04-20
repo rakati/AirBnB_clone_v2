@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
+import shlex
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -227,13 +228,13 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            objects_dict = storage.all(args)
-            for obj_key, obj in objects_dict.items():
-                print_list.append(str(obj))
+            objects_dict = storage.all(HBNBCommand.classes[args])
+            for k, v in objects_dict.items():
+                print_list.append(str(v))
         else:
             objects_dict = storage.all()
-            for obj_key, obj in objects_dict.items():
-                print_list.append(str(obj))
+            for v in objects_dict.values():
+                print_list.append(str(v))
 
         print(print_list)
 
