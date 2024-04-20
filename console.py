@@ -113,7 +113,6 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-
     def do_create(self, args):
         """ Create an object of any class"""
         if not args:
@@ -142,12 +141,10 @@ class HBNBCommand(cmd.Cmd):
         # Print the ID of the new instance
         print(new_instance.id)
 
-
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
-
 
     def do_show(self, args):
         """ Method to show an individual object """
@@ -214,7 +211,6 @@ class HBNBCommand(cmd.Cmd):
         print("Destroys an individual instance of a class")
         print("[Usage]: destroy <className> <objectId>\n")
 
-
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
@@ -233,7 +229,6 @@ class HBNBCommand(cmd.Cmd):
                 print_list.append(str(v))
 
         print(print_list)
-
 
     def help_all(self):
         """ Help information for the all command """
