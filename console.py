@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Console Module """
-import shlex
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -152,32 +151,32 @@ class HBNBCommand(cmd.Cmd):
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
 
+
     def do_show(self, args):
         """ Method to show an individual object """
-        new = args.partition(" ")
-        c_name = new[0]
-        c_id = new[2]
-
-        # guard against trailing args
-        if c_id and ' ' in c_id:
-            c_id = c_id.partition(' ')[0]
-
-        if not c_name:
+        if not args:
             print("** class name missing **")
             return
+
+        args_list = args.split()
+        c_name = args_list[0]
+        if len(args_list) < 2:
+            print("** instance id missing **")
+            return
+
+        c_id = args_list[1]
 
         if c_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
-        if not c_id:
-            print("** instance id missing **")
-            return
+        key = "{}.{}".format(c_name, c_id)
+        obj_dict = storage.all(HBNBCommand.classes[c_name])
+        obj = obj_dict.get(key)
 
-        key = c_name + "." + c_id
-        try:
-            print(storage._FileStorage__objects[key])
-        except KeyError:
+        if obj:
+            print(obj)
+        else:
             print("** no instance found **")
 
     def help_show(self):
