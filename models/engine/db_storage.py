@@ -47,7 +47,10 @@ class DBStorage:
                 'Amenity': Amenity
             }
         else:
-            cls_dict = {cls.__name__: cls}
+            if isinstance(cls, str):
+                cls_dict = {cls: eval(cls)}
+            else:
+                cls_dict = {cls.__name__: cls}
 
         objects_dict = {}
         for cls_name, cls in cls_dict.items():
@@ -56,6 +59,7 @@ class DBStorage:
                 key = "{}.{}".format(cls_name, obj.id)
                 objects_dict[key] = obj
         return objects_dict
+
 
     def new(self, obj):
         """Add the object to the current database session"""
