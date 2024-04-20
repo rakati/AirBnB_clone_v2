@@ -27,7 +27,8 @@ class BaseModel:
             kwargs['updated_at'] = datetime.strptime(
                     kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
         for key, value in kwargs.items():
-            setattr(self, key, value)
+            if key != "__class__":
+                setattr(self, key, value)
 
     def __str__(self):
         """Returns a string representation of the instance"""
