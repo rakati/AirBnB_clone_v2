@@ -12,6 +12,6 @@ to_replace="# Add location to Airbnb static files\n\
 \t\talias /data/web_static/current/;\n\
 \t}\n\
 \n\
-\terror_page 404 /404.html;"
-sed -i "s@error_page 404 /404.html;@$to_replace@g" /etc/nginx/sites-available/default
+\tlocation / {"
+sed -i "s@location / {@$to_replace@g" /etc/nginx/sites-available/default
 service nginx restart
