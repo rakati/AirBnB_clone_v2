@@ -25,8 +25,9 @@ def c_is_fun_route(text):
     return 'C ' + re.sub('_', ' ', text)
 
 
-@app.route('/python/<string:text>', strict_slashes=False,
+@app.route('/python', strict_slashes=False,
            defaults={'text': 'is cool'})
+@app.route('/python/<string:text>', strict_slashes=False)
 def python_is_cool_route(text):
     '''router for route url'''
     import re
