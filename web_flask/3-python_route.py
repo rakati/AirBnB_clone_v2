@@ -26,7 +26,7 @@ def c_is_fun_route(text):
 
 
 @app.route('/python/<string:text>', strict_slashes=False,
-           default={'text': 'is cool'})
+           defaults={'text': 'is cool'})
 def python_is_cool_route(text):
     '''router for route url'''
     import re
